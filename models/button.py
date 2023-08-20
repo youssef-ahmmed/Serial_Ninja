@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QPushButton
 
 
 class RoundButton(QPushButton):
-    def __init__(self):
+    def __init__(self, name):
         super().__init__()
 
         self.setFixedSize(100, 40)
@@ -15,8 +15,9 @@ class RoundButton(QPushButton):
         palette = QPalette()
         palette.setColor(QPalette.ButtonText, Qt.white)
         self.setPalette(palette)
+        self.setText(name)
 
-    def paint_event(self, event):
+    def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
 
