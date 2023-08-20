@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QMenuBar, QMenu, QAction, QActionGroup
+from PyQt5.QtWidgets import QMenuBar, QMenu, QAction, QActionGroup, QApplication
+
+from models.setting_dialog import SerialSettingsDialog
 
 
 class MenuBar(QMenuBar):
@@ -21,6 +23,17 @@ class MenuBar(QMenuBar):
         self.file_menu.addAction(self.open_action)
         self.file_menu.addAction(self.save_action)
         self.settings_menu.addAction(self.port_configurations_action)
+        self.port_configurations_action.triggered.connect(self.show_serial_settings)
+
+    def show_serial_settings(self):
+        serial_settings_dialog = SerialSettingsDialog()
+
+        screen_geometry = QApplication.desktop().screenGeometry()
+        x = (screen_geometry.width() - serial_settings_dialog.width()) / 2
+        y = (screen_geometry.height() - serial_settings_dialog.height()) / 2
+        serial_settings_dialog.move(x, y)
+
+        serial_settings_dialog.exec_()
 
     def init_encryption_menu(self):
         self.encryption_mode_submenu = QMenu("Encryption Mode", self)
