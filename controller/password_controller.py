@@ -29,5 +29,5 @@ class PasswordController:
         if len(password) == 4 and password.isascii():
             return True
         elif len(password) != 4 or not password.isascii():
-            LogController.get_instance().log_error(strings.PASSWORD_VALID)
+            LogController.get_instance().log_error(strings.PASSWORD_ERROR)
             return False
