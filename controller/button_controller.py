@@ -39,8 +39,8 @@ class ButtonController:
             return
 
         password = PasswordController.get_instance().get_password()
-        SerialCommunication(password)
-        LogController.get_instance().log_success(strings.SEND_SUCCESS)
+        if not SerialCommunication(password):
+            LogController.get_instance().log_success(strings.SEND_SUCCESS)
         self.save_to_file()
 
     def save_to_file(self):

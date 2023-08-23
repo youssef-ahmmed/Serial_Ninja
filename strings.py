@@ -21,3 +21,5 @@ CONFIGURATION_ERROR = "Device Can Not Be Found or Can Not Be Configured"
 SETTING_ERROR = "No Setting Found"
 
 SEND_SUCCESS = "Data Send Successfully"
+
+PORT_NOT_OPEN_ERROR = "Port is not open"

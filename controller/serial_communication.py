@@ -33,8 +33,12 @@ class SerialCommunication:
 
     def send_data(self, data):
         try:
-            for char in data:
-                self.serial_port.write(char.encode())
+            if not self.serial_port.is_open:
+                LogController.get_instance().log_error(strings.PORT_NOT_OPEN_ERROR)
+                return False
+            else:
+                for char in data:
+                    self.serial_port.write(char.encode())
         except SerialTimeoutException as e:
             LogController.get_instance().log_error(strings.TIMEOUT_ERROR)
             raise e
