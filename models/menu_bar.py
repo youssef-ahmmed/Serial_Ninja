@@ -1,11 +1,16 @@
 from PyQt5.QtWidgets import QMenuBar, QMenu, QAction, QActionGroup, QApplication
 
+from controller.setting_controller import SettingController
 from models.setting_dialog import SerialSettingsDialog
 
 
 class MenuBar(QMenuBar):
     def __init__(self, parent=None):
         super().__init__(parent)
+
+        self.serial_settings_dialog = SerialSettingsDialog()
+        SettingController(self.serial_settings_dialog)
+
         self.init_menus()
         self.init_actions()
         self.init_encryption_menu()
@@ -26,14 +31,12 @@ class MenuBar(QMenuBar):
         self.port_configurations_action.triggered.connect(self.show_serial_settings)
 
     def show_serial_settings(self):
-        serial_settings_dialog = SerialSettingsDialog()
-
         screen_geometry = QApplication.desktop().screenGeometry()
-        x = (screen_geometry.width() - serial_settings_dialog.width()) / 2
-        y = (screen_geometry.height() - serial_settings_dialog.height()) / 2
-        serial_settings_dialog.move(x, y)
+        x = (screen_geometry.width() - self.serial_settings_dialog.width()) / 2
+        y = (screen_geometry.height() - self.serial_settings_dialog.height()) / 2
+        self.serial_settings_dialog.move(x, y)
 
-        serial_settings_dialog.exec_()
+        self.serial_settings_dialog.exec_()
 
     def init_encryption_menu(self):
         self.encryption_mode_submenu = QMenu("Encryption Mode", self)
@@ -52,3 +55,6 @@ class MenuBar(QMenuBar):
         self.encryption_mode_submenu.addAction(self.no_encryption_action)
 
         self.settings_menu.addMenu(self.encryption_mode_submenu)
+
+    def is_encryption_selected(self):
+        return self.encryption_action.isChecked()
