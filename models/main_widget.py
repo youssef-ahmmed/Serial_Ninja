@@ -1,7 +1,8 @@
 import sys
 
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget, QHBoxLayout
-from PyQt5.uic.Compiler.qtproxies import QtCore
+# from PyQt5.uic.Compiler.qtproxies import QtCore
 from PyQt5.QtCore import Qt
 
 from models.button import RoundButton
@@ -23,6 +24,7 @@ class MainWindow(QMainWindow):
         self.central_widget = QWidget(self)
         self.setCentralWidget(self.central_widget)
         self.central_widget.setStyleSheet("background-color: #F5F5F5;")
+        self.setWindowIcon(QIcon("../assets/ninja-logo.png"))
 
         self.init_ui()
         self.center_on_screen()
@@ -64,8 +66,8 @@ class MainWindow(QMainWindow):
 
     def center_on_screen(self):
         screen_geometry = QDesktopWidget().screenGeometry()
-        self.move((screen_geometry.width() - self.width()) / 2,
-                  (screen_geometry.height() - self.height()) / 2)
+        self.move(int((screen_geometry.width() - self.width()) / 2),
+                  int((screen_geometry.height() - self.height()) / 2))
 
 
 def main():
