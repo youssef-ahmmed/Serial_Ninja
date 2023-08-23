@@ -2,7 +2,6 @@ import sys
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget, QHBoxLayout
-# from PyQt5.uic.Compiler.qtproxies import QtCore
 from PyQt5.QtCore import Qt
 
 from models.button import RoundButton
