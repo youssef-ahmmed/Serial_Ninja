@@ -1,13 +1,15 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget, QHBoxLayout
+from PyQt5.uic.Compiler.qtproxies import QtCore
+from PyQt5.QtCore import Qt
 
 from models.button import RoundButton
 from controller.button_controller import ButtonController
 from controller.log_controller import LogController
 from controller.password_controller import PasswordController
 from models.log import LogWidget
-from models.menu_bar import MenuBar
+from models.toolbar import Toolbar
 from models.password import PasswordEntry
 
 
@@ -16,10 +18,11 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Serial Ninja")
 
-        self.setGeometry(200, 200, 1000, 700)
+        self.setGeometry(200, 200, 500, 400)
 
         self.central_widget = QWidget(self)
         self.setCentralWidget(self.central_widget)
+        self.central_widget.setStyleSheet("background-color: #F5F5F5;")
 
         self.init_ui()
         self.center_on_screen()
@@ -27,20 +30,34 @@ class MainWindow(QMainWindow):
     def init_ui(self):
         layout = QVBoxLayout(self.central_widget)
 
-        menu_bar = MenuBar(self)
+        horizontal_spacer = QHBoxLayout()
+        horizontal_spacer.addStretch(1)
+
+        sub_layout = QVBoxLayout()
+        sub_layout.setAlignment(Qt.AlignCenter)
+
+        toolbar = Toolbar(self)
 
         password_entry = PasswordEntry(self)
         PasswordController(password_entry)
+        password_entry.setFixedHeight(100)
+        password_entry.setFixedWidth(200)
 
         round_button = RoundButton("Click Me!")
         ButtonController(round_button)
+        round_button.setFixedSize(190, 40)
+
+        sub_layout.addWidget(password_entry)
+        sub_layout.addWidget(round_button)
+
+        horizontal_spacer.addLayout(sub_layout)
+        horizontal_spacer.addStretch(1)
 
         log_widget = LogWidget(self)
         LogController(log_widget)
 
-        layout.addWidget(menu_bar)
-        layout.addWidget(password_entry)
-        layout.addWidget(round_button)
+        layout.addWidget(toolbar)
+        layout.addLayout(horizontal_spacer)
         layout.addWidget(log_widget)
 
         self.central_widget.setLayout(layout)
