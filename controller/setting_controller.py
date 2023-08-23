@@ -1,5 +1,5 @@
 import strings
-from control.log_controller import LogController
+from controller.log_controller import LogController
 
 
 class SettingController:
@@ -32,7 +32,7 @@ class SettingController:
 
     def validate_selected_protocol(self):
         if self.get_communication_protocol() == "Select Protocol":
-            LogController.get_instance().log_error(strings.NO_SETTING)
+            LogController.get_instance().log_error(strings.SETTING_ERROR)
             return False
         return True
 

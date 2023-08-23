@@ -3,9 +3,9 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget
 
 from button import RoundButton
-from control.button_controller import ButtonController
-from control.log_controller import LogController
-from control.password_controller import PasswordController
+from controller.button_controller import ButtonController
+from controller.log_controller import LogController
+from controller.password_controller import PasswordController
 from log import LogWidget
 from menu_bar import MenuBar
 from password import PasswordEntry
@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.central_widget)
 
         self.init_ui()
+        self.center_on_screen()
 
     def init_ui(self):
         layout = QVBoxLayout(self.central_widget)
@@ -43,6 +44,11 @@ class MainWindow(QMainWindow):
         layout.addWidget(log_widget)
 
         self.central_widget.setLayout(layout)
+
+    def center_on_screen(self):
+        screen_geometry = QDesktopWidget().screenGeometry()
+        self.move((screen_geometry.width() - self.width()) / 2,
+                  (screen_geometry.height() - self.height()) / 2)
 
 
 def main():
