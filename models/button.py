@@ -7,10 +7,10 @@ class RoundButton(QPushButton):
     def __init__(self, name):
         super().__init__()
 
-        self.setFixedSize(100, 40)
+        # self.setFixedSize(100, 40)
 
-        self.normal_color = QColor("#126963")
-        self.hover_color = QColor("#19958c")
+        self.normal_color = QColor("#4682A9")
+        self.hover_color = QColor("#91C8E4")
 
         palette = QPalette()
         palette.setColor(QPalette.ButtonText, Qt.white)
