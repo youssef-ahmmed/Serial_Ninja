@@ -11,9 +11,19 @@ class SerialCommunication:
     def __init__(self, data):
         self.serial_port = serial.Serial()
 
-        self.get_setting_data()
-        self.send_data(data)
-        self.close_serial_port()
+        self.execute_serial_transaction(data)
+
+    def execute_serial_transaction(self, data):
+        try:
+            self.get_setting_data()
+            self.serial_port.open()
+            self.send_data(data)
+            LogController.get_instance().log_success(strings.SEND_SUCCESS)
+        except Exception as e:
+            LogController.get_instance().log_error(strings.PORT_NOT_OPEN_ERROR)
+            LogController.get_instance().log_error(str(e))
+        finally:
+            self.close_serial_port()
 
     def get_setting_data(self):
         setting_data = SettingController.get_instance().get_port_configuration_data()

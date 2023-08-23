@@ -34,13 +34,13 @@ class ButtonController:
         if not SettingController.get_instance().validate_selected_protocol():
             self.save_to_file()
             return
-        if not PasswordController.get_instance().validate_password():
-            self.save_to_file()
-            return
+        # TODO:
+        # if not PasswordController.get_instance().validate_password():
+        #     self.save_to_file()
+        #     return
 
         password = PasswordController.get_instance().get_password()
-        if not SerialCommunication(password):
-            LogController.get_instance().log_success(strings.SEND_SUCCESS)
+        SerialCommunication(password)
         self.save_to_file()
 
     def save_to_file(self):
