@@ -1,10 +1,10 @@
 import serial
 import serial.tools.list_ports
 from serial.serialutil import SerialException, SerialTimeoutException
-
 import strings
 from controller.log_controller import LogController
 from controller.setting_controller import SettingController
+import time
 
 
 class SerialCommunication:
@@ -49,6 +49,7 @@ class SerialCommunication:
             else:
                 for char in data:
                     self.serial_port.write(char.encode())
+                    time.sleep(0.01)
         except SerialTimeoutException as e:
             LogController.get_instance().log_error(strings.TIMEOUT_ERROR)
             raise e
