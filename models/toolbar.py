@@ -18,13 +18,13 @@ class Toolbar(QToolBar):
         SettingController(self.serial_settings_dialog)
 
     def init_toolbar(self):
-        self.port_configuration_action = QAction(QIcon("../assets/configuration.png"), "Port Configurations", self)
+        self.port_configuration_action = QAction(QIcon("assets/configuration.ico"), "Port Configurations", self)
         self.port_configuration_action.setCheckable(True)
 
-        self.encryption_mode_action = QAction(QIcon("../assets/encrypt.png"), "Encryption Mode", self)
+        self.encryption_mode_action = QAction(QIcon("assets/encrypt.ico"), "Encryption Mode", self)
         self.encryption_mode_action.setCheckable(True)
 
-        self.help_action = QAction(QIcon("../assets/help-desk.png"), "Help", self)
+        self.help_action = QAction(QIcon("assets/help-desk.ico"), "Help", self)
         self.help_action.setCheckable(True)
 
         self.addAction(self.port_configuration_action)

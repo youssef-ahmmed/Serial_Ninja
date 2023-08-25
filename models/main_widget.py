@@ -1,9 +1,7 @@
 import sys
-
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-
 from models.button import RoundButton
 from controller.button_controller import ButtonController
 from controller.log_controller import LogController
@@ -17,13 +15,11 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Serial Ninja")
-
         self.setGeometry(200, 200, 500, 400)
-
         self.central_widget = QWidget(self)
         self.setCentralWidget(self.central_widget)
         self.central_widget.setStyleSheet("background-color: #F5F5F5;")
-        self.setWindowIcon(QIcon("../assets/ninja-logo.png"))
+        self.setWindowIcon(QIcon("assets/ninja-logo.ico"))
 
         self.init_ui()
         self.center_on_screen()
