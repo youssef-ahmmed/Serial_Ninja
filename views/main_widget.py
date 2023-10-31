@@ -2,13 +2,13 @@ import sys
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-from models.button import RoundButton
-from controller.button_controller import ButtonController
+from views.button import RoundButton
+from views.button_controller import ButtonController
 from controller.log_controller import LogController
 from controller.password_controller import PasswordController
-from models.log import LogWidget
-from models.toolbar import Toolbar
-from models.password import PasswordEntry
+from views.log import LogWidget
+from views.toolbar import Toolbar
+from views.password import PasswordEntry
 
 
 class MainWindow(QMainWindow):

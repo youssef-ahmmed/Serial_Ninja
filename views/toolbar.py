@@ -3,8 +3,8 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QToolBar, QAction
 
 from controller.setting_controller import SettingController
-from models.encryption_dialog import EncryptionDialog
-from models.setting_dialog import SerialSettingsDialog
+from views.encryption_dialog import EncryptionDialog
+from views.setting_dialog import SerialSettingsDialog
 
 
 class Toolbar(QToolBar):
