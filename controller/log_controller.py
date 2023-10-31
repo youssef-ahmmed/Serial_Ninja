@@ -1,4 +1,5 @@
 from PyQt5.QtGui import QColor, QTextCharFormat, QTextCursor
+
 import strings
 
 
@@ -25,6 +26,9 @@ class LogController:
 
     def log_success(self, message):
         self._log_message(f"[Success]: {message}", QColor(0, 128, 0))
+
+    def log_info(self, message):
+        self._log_message(f"[Info]: {message}", QColor(0, 0, 255))
 
     def _log_message(self, message, color):
         cursor = self.log_widget.log.textCursor()

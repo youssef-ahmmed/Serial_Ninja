@@ -22,4 +22,6 @@ SETTING_ERROR = "No Setting Found"
 
 SEND_SUCCESS = "Data Send Successfully"
 
+RECEIVE_SUCCESS = "Data Received Successfully"
+
 PORT_NOT_OPEN_ERROR = "Port is not open"
