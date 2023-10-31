@@ -1,13 +1,11 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QPainter, QBrush, QColor, QFont
-from PyQt5.QtWidgets import QPushButton, QMessageBox
+from PyQt5.QtWidgets import QPushButton
 
 
 class RoundButton(QPushButton):
     def __init__(self, name):
         super().__init__()
-
-        # self.setFixedSize(100, 40)
 
         self.normal_color = QColor("#4682A9")
         self.hover_color = QColor("#91C8E4")

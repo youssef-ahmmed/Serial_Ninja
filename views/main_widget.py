@@ -1,14 +1,17 @@
 import sys
+
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QDesktopWidget, QHBoxLayout
-from PyQt5.QtCore import Qt
-from views.button import RoundButton
-from views.button_controller import ButtonController
+
 from controller.log_controller import LogController
 from controller.password_controller import PasswordController
+from controller.receive_button_contoller import ReceiveButtonController
+from controller.send_button_controller import SendButtonController
+from views.button import RoundButton
 from views.log import LogWidget
-from views.toolbar import Toolbar
 from views.password import PasswordEntry
+from views.toolbar import Toolbar
 
 
 class MainWindow(QMainWindow):
@@ -24,6 +27,10 @@ class MainWindow(QMainWindow):
         self.init_ui()
         self.center_on_screen()
 
+    def start_communication(self):
+        self.receive_button.clicked.connect(self.disable_password_entry)
+        self.send_button.clicked.connect(self.enable_password_entry)
+
     def init_ui(self):
         layout = QVBoxLayout(self.central_widget)
 
@@ -35,17 +42,21 @@ class MainWindow(QMainWindow):
 
         toolbar = Toolbar(self)
 
-        password_entry = PasswordEntry(self)
-        PasswordController(password_entry)
-        password_entry.setFixedHeight(100)
-        password_entry.setFixedWidth(200)
+        self.password_entry = PasswordEntry(self)
+        PasswordController(self.password_entry)
+        self.password_entry.setFixedHeight(100)
+        self.password_entry.setFixedWidth(200)
 
-        round_button = RoundButton("Click Me!")
-        ButtonController(round_button)
-        round_button.setFixedSize(190, 40)
+        self.send_button = RoundButton("Send")
+        self.receive_button = RoundButton("Receive")
+        SendButtonController(self.send_button)
+        self.receive_button_controller = ReceiveButtonController(self.receive_button)
+        self.send_button.setFixedSize(190, 40)
+        self.receive_button.setFixedSize(190, 40)
 
-        sub_layout.addWidget(password_entry)
-        sub_layout.addWidget(round_button)
+        sub_layout.addWidget(self.password_entry)
+        sub_layout.addWidget(self.send_button)
+        sub_layout.addWidget(self.receive_button)
 
         horizontal_spacer.addLayout(sub_layout)
         horizontal_spacer.addStretch(1)
@@ -63,6 +74,14 @@ class MainWindow(QMainWindow):
         screen_geometry = QDesktopWidget().screenGeometry()
         self.move(int((screen_geometry.width() - self.width()) / 2),
                   int((screen_geometry.height() - self.height()) / 2))
+
+    def disable_password_entry(self):
+        self.password_entry.setEnabled(False)
+        self.password_entry.set_text(self.receive_button_controller.receive_data())
+
+    def enable_password_entry(self):
+        self.password_entry.setEnabled(True)
+        self.password_entry.clear_text()
 
 
 def main():

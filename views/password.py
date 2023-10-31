@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette
-from PyQt5.QtWidgets import QWidget, QLineEdit, QCheckBox, QVBoxLayout, QPushButton, QMainWindow, QApplication
+from PyQt5.QtWidgets import QWidget, QLineEdit, QCheckBox, QVBoxLayout
 
 
 class PasswordEntry(QWidget):
@@ -28,3 +28,9 @@ class PasswordEntry(QWidget):
             self.line_edit.setEchoMode(QLineEdit.Password)
         else:
             self.line_edit.setEchoMode(QLineEdit.Normal)
+
+    def set_text(self, text):
+        self.line_edit.setText(text)
+
+    def clear_text(self):
+        self.line_edit.clear()
