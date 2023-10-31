@@ -1,17 +1,17 @@
+import time
+
 import serial
 import serial.tools.list_ports
 from serial.serialutil import SerialException, SerialTimeoutException
+
 import strings
 from controller.log_controller import LogController
 from controller.setting_controller import SettingController
-import time
 
 
 class SerialCommunication:
-    def __init__(self, data):
+    def __init__(self):
         self.serial_port = serial.Serial()
-
-        self.execute_serial_transaction(data)
 
     def execute_serial_transaction(self, data):
         try:
@@ -21,7 +21,17 @@ class SerialCommunication:
             LogController.get_instance().log_success(strings.SEND_SUCCESS)
         except Exception as e:
             LogController.get_instance().log_error(strings.PORT_NOT_OPEN_ERROR)
-            LogController.get_instance().log_error(str(e))
+        finally:
+            self.close_serial_port()
+
+    def execute_serial_receiving(self):
+        try:
+            self.get_setting_data()
+            self.serial_port.open()
+            LogController.get_instance().log_success(strings.RECEIVE_SUCCESS)
+            LogController.get_instance().log_info(f"Data Received: {self.read_data()}")
+        except Exception as e:
+            LogController.get_instance().log_error(strings.PORT_NOT_OPEN_ERROR)
         finally:
             self.close_serial_port()
 
