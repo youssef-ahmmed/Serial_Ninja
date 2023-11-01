@@ -22,6 +22,8 @@ class ReceiveButtonController:
             super(ReceiveButtonController, self).__init__()
             ReceiveButtonController._instance = self
             self.receive_button = receive_button
+            self.receive_serial = SerialCommunication()
+
         else:
             raise Exception(strings.SINGLETON_ERROR)
 
@@ -35,9 +37,9 @@ class ReceiveButtonController:
             self.save_to_file()
             return
 
-        receive_serial = SerialCommunication()
         self.save_to_file()
-        receive_serial.execute_serial_receiving()
+        self.receive_serial.initiate_communication()
+        self.receive_serial.execute_serial_receiving()
 
     def save_to_file(self):
         file_storage = FileStorage()
