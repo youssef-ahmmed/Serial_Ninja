@@ -41,7 +41,6 @@ class SerialCommunication:
     @staticmethod
     def get_default_data():
         SerialCommunication.serial_port.port = 'COM1'
-        print(SerialCommunication.serial_port.port)
         SerialCommunication.serial_port.baudrate = int(9600)
         SerialCommunication.serial_port.bytesize = int(8)
         SerialCommunication.serial_port.parity = 'N'
@@ -91,7 +90,3 @@ class SerialCommunication:
         except SerialException as e:
             LogController.get_instance().log_error(strings.CONFIGURATION_ERROR)
             raise e
-
-    # def close_serial_port(self):
-    #     if self.serial_port and self.serial_port.is_open:
-    #         self.serial_port.close()
